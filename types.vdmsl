@@ -1,0 +1,13 @@
+module Foo
+exports all
+definitions
+
+types
+    Named = nat;
+    --Union = <Bar> | <Foo>;
+    Record :: a : nat1
+              b : seq of char
+              c : Named;
+    Union = Record | Named;
+functions
+end Foo
