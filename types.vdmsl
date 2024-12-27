@@ -4,10 +4,22 @@ definitions
 
 types
     Named = nat;
-    --Union = <Bar> | <Foo>;
+    Union = Record | Named;
+    Product = nat * Named;
     Record :: a : nat1
               b : seq of char
-              c : Named;
-    Union = Record | Named;
+              c : Named
+              d : rat
+              e : int
+              f : real
+              g : <A>;
+    Optional = [nat];
+    Set = set of char;
+    Set1 = set1 of char;
+    Seq = seq of char;
+    Seq1 = seq1 of char;
+    Map = map nat to char;
+    InjectiveMap = inmap nat to char;
+    Function = char -> char;
 functions
 end Foo

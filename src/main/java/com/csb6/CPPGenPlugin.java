@@ -48,10 +48,11 @@ public class CPPGenPlugin extends AnalysisPlugin implements EventListener {
             for(var module : moduleList) {
                 System.out.println("Processing module '" + module.name + "'...");
                 var includes = new HashSet<String>();
+                var enums = new HashSet<String>();
                 var output = new StringBuilder();
                 try {
                     for (var def : module.defs) {
-                        def.apply(new GenDefVisitor(output, includes), null);
+                        def.apply(new GenDefVisitor(output, includes, enums), null);
                     }
                 } catch(GenerationError err) {
                     System.out.println("Error: " + err.getMessage());
@@ -62,6 +63,11 @@ public class CPPGenPlugin extends AnalysisPlugin implements EventListener {
                     .sorted()
                     .forEach(i -> System.out.println(String.format("#include <%s>", i)));
                 System.out.println();
+                System.out.println("enum {");
+                enums.stream()
+                    .sorted()
+                    .forEach(e -> System.out.println(String.format("  %s,", e)));
+                System.out.println("};\n");
                 System.out.println(output.toString());
             }
             return null;

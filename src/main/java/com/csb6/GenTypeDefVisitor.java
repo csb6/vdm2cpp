@@ -8,21 +8,23 @@ import com.fujitsu.vdmj.tc.types.TCType;
 import com.fujitsu.vdmj.tc.types.visitors.TCTypeVisitor;
 
 public class GenTypeDefVisitor extends TCTypeVisitor<Void, Void> {
-    
+
     public StringBuilder out;
     public Set<String> includes;
+    public Set<String> enums;
 
-    GenTypeDefVisitor(StringBuilder out, Set<String> includes)
+    GenTypeDefVisitor(StringBuilder out, Set<String> includes, Set<String> enums)
     {
         this.out = out;
         this.includes = includes;
+        this.enums = enums;
     }
 
     @Override
     public Void caseRecordType(TCRecordType type, Void arg) {
         checkRecursive(type);
         out.append(String.format("struct %s {\n", type.name));
-        var fieldVisitor = new GenTypeVisitor(out, includes);
+        var fieldVisitor = new GenTypeVisitor(out, includes, enums);
         for (var field : type.fields) {
             checkRecursive(field.type);
             out.append("  ");
@@ -37,7 +39,7 @@ public class GenTypeDefVisitor extends TCTypeVisitor<Void, Void> {
     public Void caseNamedType(TCNamedType type, Void arg) {
         checkRecursive(type);
         out.append(String.format("using %s = ", type.typename));
-        type.type.apply(new GenTypeVisitor(out, includes), null);
+        type.type.apply(new GenTypeVisitor(out, includes, enums), null);
         return null;
     }
 
@@ -51,5 +53,5 @@ public class GenTypeDefVisitor extends TCTypeVisitor<Void, Void> {
             throw new GenerationError("Recursive/infinite types are not supported ('" + type.toString()  + "')");
         }
     }
-    
+
 }

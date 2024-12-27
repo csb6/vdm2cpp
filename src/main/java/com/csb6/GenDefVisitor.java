@@ -10,15 +10,17 @@ public class GenDefVisitor extends TCDefinitionVisitor<Void, Void> {
 
     public StringBuilder out;
     public Set<String> includes;
+    public Set<String> enums;
 
-    public GenDefVisitor(StringBuilder out, Set<String> includes) {
+    public GenDefVisitor(StringBuilder out, Set<String> includes, Set<String> enums) {
         this.out = out;
         this.includes = includes;
+        this.enums = enums;
     }
 
     @Override
     public Void caseTypeDefinition(TCTypeDefinition node, Void arg) {
-        node.type.apply(new GenTypeDefVisitor(out, includes), null);
+        node.type.apply(new GenTypeDefVisitor(out, includes, enums), null);
         out.append(";\n");
         return null;
     }
