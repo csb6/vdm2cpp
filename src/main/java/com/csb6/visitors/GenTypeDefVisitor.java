@@ -46,12 +46,12 @@ public class GenTypeDefVisitor extends TCTypeVisitor<Void, Void> {
 
     @Override
     public Void caseType(TCType type, Void arg) {
-        throw new GenerationError("Type '" + type.toString() + "' not translated (unsupported type)");
+        throw new GenerationError(type);
     }
 
     private static void checkRecursive(TCType type) {
         if(type.isRecursive()) {
-            throw new GenerationError("Recursive/infinite types are not supported ('" + type.toString()  + "')");
+            throw new GenerationError(type, "recursive types are not supported");
         }
     }
 

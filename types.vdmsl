@@ -22,4 +22,7 @@ types
     InjectiveMap = inmap nat to char;
     Function = char -> char;
 functions
+    ident: char -> char
+    ident(c) == c;
+
 end Foo

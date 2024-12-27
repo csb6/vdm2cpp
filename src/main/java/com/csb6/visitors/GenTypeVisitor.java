@@ -189,7 +189,7 @@ public class GenTypeVisitor extends TCTypeVisitor<Void, Void> {
 
     @Override
     public Void caseType(TCType type, Void arg) {
-        throw new GenerationError("Type '" + type.toString() + "' not translated (unsupported type)");
+        throw new GenerationError(type);
     }
 
     private void applyList(Iterable<TCType> list, int length)
