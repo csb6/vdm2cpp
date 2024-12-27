@@ -3,6 +3,7 @@ package com.csb6;
 import java.util.HashSet;
 import java.util.List;
 
+import com.csb6.visitors.GenDefVisitor;
 import com.fujitsu.vdmj.lex.Dialect;
 import com.fujitsu.vdmj.messages.VDMMessage;
 import com.fujitsu.vdmj.plugins.AnalysisEvent;

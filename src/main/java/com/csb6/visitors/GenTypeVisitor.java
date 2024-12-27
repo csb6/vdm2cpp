@@ -1,7 +1,8 @@
-package com.csb6;
+package com.csb6.visitors;
 
 import java.util.Set;
 
+import com.csb6.GenerationError;
 import com.fujitsu.vdmj.tc.types.TCBooleanType;
 import com.fujitsu.vdmj.tc.types.TCCharacterType;
 import com.fujitsu.vdmj.tc.types.TCFunctionType;

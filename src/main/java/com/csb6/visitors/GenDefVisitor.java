@@ -1,7 +1,8 @@
-package com.csb6;
+package com.csb6.visitors;
 
 import java.util.Set;
 
+import com.csb6.GenerationError;
 import com.fujitsu.vdmj.tc.definitions.TCDefinition;
 import com.fujitsu.vdmj.tc.definitions.TCTypeDefinition;
 import com.fujitsu.vdmj.tc.definitions.visitors.TCDefinitionVisitor;
