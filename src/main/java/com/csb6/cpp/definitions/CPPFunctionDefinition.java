@@ -3,7 +3,10 @@ package com.csb6.cpp.definitions;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
+import com.csb6.cpp.patterns.CPPPatternList;
+import com.csb6.cpp.patterns.CPPPatternListList;
 import com.csb6.cpp.types.CPPFunctionType;
 import com.csb6.cpp.types.CPPType;
 import com.csb6.cpp.types.CPPTypeList;
@@ -14,15 +17,25 @@ public class CPPFunctionDefinition extends CPPDefinition {
     public CPPType resultType;
     public TCNameToken name;
     public CPPTypeList paramTypes;
+    public CPPPatternList params;
 
-    // TODO: parameter names and body
-    public CPPFunctionDefinition(CPPFunctionType type, TCNameToken name, boolean isCurried) throws Exception {
+    // TODO: body
+    public CPPFunctionDefinition(CPPFunctionType type, TCNameToken name, CPPPatternListList paramPatternList, boolean isCurried) throws Exception {
         this.resultType = type.resultType;
         this.name = name;
         this.paramTypes = type.paramTypes;
 
         if(isCurried) {
             throw new Exception("Cannot translate function '" + name + "' (curried functions are not supported)");
+        }
+
+        if(paramPatternList.size() != 1) {
+            throw new Exception("Cannot translate function '" + name + "' (functions with multiple pattern lists are not supported)");
+        }
+
+        this.params = paramPatternList.get(0);
+        if(this.params.size() != this.paramTypes.size()) {
+            throw new Exception(String.format("Function '%s': Number of parameters and parameter types do not match", name));
         }
     }
 
@@ -48,8 +61,15 @@ public class CPPFunctionDefinition extends CPPDefinition {
     public String toString() {
         var s = new StringBuilder();
         s.append(String.format("%s %s(", resultType, name));
-        s.append(paramTypes.stream()
-            .map(t -> t.toString())
+        s.append(IntStream.range(0, params.size())
+            .mapToObj(i -> {
+                var paramName = params.get(i).toString();
+                if(paramName.isEmpty()) {
+                    return paramTypes.get(i).toString();
+                } else {
+                    return String.format("%s %s", paramTypes.get(i), paramName);
+                }
+            })
             .collect(Collectors.joining(", ")));
         s.append(");");
         return s.toString();
