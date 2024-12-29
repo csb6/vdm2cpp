@@ -25,4 +25,7 @@ functions
     ident: char -> char
     ident(c) == c;
 
+    two_args: char * char -> nat1
+    two_args(-, -) == 4;
+
 end Foo

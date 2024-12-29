@@ -1,0 +1,41 @@
+# definitions
+package com.fujitsu.vdmj.tc.definitions to com.csb6.cpp.definitions;
+map TCDefinition{} to CPPDefinition();
+map TCTypeDefinition{type} to CPPTypeDefinition(type);
+map TCExplicitFunctionDefinition{type, name, isCurried} to CPPFunctionDefinition(type, name, isCurried);
+
+# types
+package com.fujitsu.vdmj.tc.types to com.csb6.cpp.types;
+map TCType{} to CPPType();
+map TCInvariantType{} to CPPDefType();
+map TCNamedType{typename, type} to CPPTypedef(typename, type);
+map TCBooleanType{} to CPPBoolType();
+map TCCharacterType{} to CPPCharType();
+map TCNaturalOneType{} to CPPBigIntType();
+map TCNaturalType{} to CPPBigIntType();
+map TCIntegerType{} to CPPBigIntType();
+map TCRealType{} to CPPBigFloatType();
+map TCRationalType{} to CPPBigFloatType();
+map TCQuoteType{value} to CPPEnumType(value);
+map TCOptionalType{type} to CPPOptionalType(type);
+map TCUnionType{types} to CPPVariantType(types);
+map TCProductType{types} to CPPTupleType(types);
+map TCSeqType{seqof} to CPPVectorType(seqof);
+map TCSeq1Type{seqof} to CPPVectorType(seqof);
+map TCSetType{setof} to CPPSetType(setof);
+map TCSet1Type{setof} to CPPSetType(setof);
+map TCMapType{from, to} to CPPMapType(from, to);
+map TCInMapType{from, to} to CPPMapType(from, to);
+map TCRecordType{name, fields} to CPPStructType(name, fields);
+map TCFunctionType{result, parameters} to CPPFunctionType(result, parameters);
+
+# misc type-related types
+map TCField{tagname, type} to CPPField(tagname, type);
+map TCFieldList{} to CPPFieldList(this);
+map TCTypeList{} to CPPTypeList(this);
+map TCTypeSet{} to CPPTypeSet(this);
+
+# unmapped
+unmapped java.lang.Boolean;
+unmapped java.lang.String;
+unmapped com.fujitsu.vdmj.tc.lex.TCNameToken;
