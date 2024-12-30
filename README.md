@@ -15,7 +15,8 @@ Currently incomplete, but supports translating basic VDM type definitions and fu
 | `Record :: a: A b: B`    | `struct Record { A a; B b; };` |
 | `[A]`                    | `std::optional<A>`             |
 | `set of char`            | `std::set<char>`               |
-| `seq of char`            | `std::vector<char>`            |
+| `seq of char`            | `std::string`                  |
+| `seq of A`               | `std::vector<A>`               |
 | `map char to A`          | `std::map<char, A>`            |
 | `A -> B`                 | `std::function<B(A)>`          |
 

@@ -6,15 +6,21 @@ import java.util.Set;
 public class CPPVectorType extends CPPType {
 
     public CPPType valueType;
+    private boolean isString;
 
     public CPPVectorType(CPPType valueType) {
         this.valueType = valueType;
+        this.isString = valueType instanceof CPPCharType;
     }
 
     @Override
     public Set<String> requiredHeaders() {
         var headers = new HashSet<>(valueType.requiredHeaders());
-        headers.add("vector");
+        if(isString) {
+            headers.add("string");
+        } else {
+            headers.add("vector");
+        }
         return headers;
     }
 
@@ -25,6 +31,6 @@ public class CPPVectorType extends CPPType {
 
     @Override
     public String toString() {
-        return String.format("std::vector<%s>", valueType);
+        return isString ? "std::string" : String.format("std::vector<%s>", valueType);
     }
 }
