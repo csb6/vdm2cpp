@@ -25,13 +25,13 @@ public class CPPTypedef extends CPPDefType {
     }
 
     @Override
-    public Set<String> requiredHeaders() {
-        return type.requiredHeaders();
+    public void collectRequiredHeaders(Set<String> headers) {
+        type.collectRequiredHeaders(headers);
     }
 
     @Override
-    public Set<String> requiredEnums() {
-        return type.requiredEnums();
+    public void collectRequiredEnums(Set<String> enums) {
+        type.collectRequiredEnums(enums);
     }
 
 }

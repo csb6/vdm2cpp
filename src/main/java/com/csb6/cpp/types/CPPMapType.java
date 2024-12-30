@@ -1,6 +1,5 @@
 package com.csb6.cpp.types;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class CPPMapType extends CPPType {
@@ -15,18 +14,16 @@ public class CPPMapType extends CPPType {
     }
 
     @Override
-    public Set<String> requiredHeaders() {
-        var headers = new HashSet<>(keyType.requiredHeaders());
-        headers.addAll(valueType.requiredHeaders());
+    public void collectRequiredHeaders(Set<String> headers) {
+        keyType.collectRequiredHeaders(headers);
+        valueType.collectRequiredHeaders(headers);
         headers.add("map");
-        return headers;
     }
 
     @Override
-    public Set<String> requiredEnums() {
-        var enums = new HashSet<>(keyType.requiredEnums());
-        enums.addAll(valueType.requiredEnums());
-        return enums;
+    public void collectRequiredEnums(Set<String> enums) {
+        keyType.collectRequiredEnums(enums);
+        valueType.collectRequiredEnums(enums);
     }
 
     @Override

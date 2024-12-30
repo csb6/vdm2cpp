@@ -6,7 +6,7 @@ import com.fujitsu.vdmj.mapper.Mappable;
 
 public abstract class CPPDefinition implements Mappable {
 
-    public abstract Set<String> requiredHeaders();
+    public abstract void collectRequiredHeaders(Set<String> headers);
 
-    public abstract Set<String> requiredEnums();
+    public abstract void collectRequiredEnums(Set<String> enums);
 }

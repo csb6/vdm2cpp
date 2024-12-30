@@ -1,6 +1,5 @@
 package com.csb6.cpp.definitions;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -42,21 +41,19 @@ public class CPPFunctionDefinition extends CPPDefinition {
     }
 
     @Override
-    public Set<String> requiredHeaders() {
-        var headers = new HashSet<>(resultType.requiredHeaders());
+    public void collectRequiredHeaders(Set<String> headers) {
+        resultType.collectRequiredHeaders(headers);
         for(var type : paramTypes) {
-            headers.addAll(type.requiredHeaders());
+            type.collectRequiredHeaders(headers);
         }
-        return headers;
     }
 
     @Override
-    public Set<String> requiredEnums() {
-        var enums = new HashSet<>(resultType.requiredEnums());
+    public void collectRequiredEnums(Set<String> enums) {
+        resultType.collectRequiredEnums(enums);
         for(var type : paramTypes) {
-            enums.addAll(type.requiredEnums());
+            type.collectRequiredEnums(enums);
         }
-        return enums;
     }
 
     @Override

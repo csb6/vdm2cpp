@@ -1,6 +1,7 @@
 package com.csb6;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import com.csb6.cpp.definitions.CPPDefinition;
@@ -83,19 +84,23 @@ public class CPPGenPlugin extends AnalysisPlugin implements EventListener {
         }
 
         // Collect and print headers
-        cppDefs.stream()
-            .flatMap(def -> def.requiredHeaders().stream())
+        var headers = new HashSet<String>();
+        for(var def : cppDefs) {
+            def.collectRequiredHeaders(headers);
+        }
+        headers.stream()
             .sorted()
-            .distinct()
             .forEach(header -> System.out.println(String.format("#include <%s>", header)));
         System.out.println();
 
         // Collect and print enums
         System.out.println("enum {");
-        cppDefs.stream()
-            .flatMap(def -> def.requiredEnums().stream())
+        var enums = new HashSet<String>();
+        for(var def : cppDefs) {
+            def.collectRequiredEnums(enums);
+        }
+        enums.stream()
             .sorted()
-            .distinct()
             .forEach(e -> System.out.println(String.format("  %s,", e)));
         System.out.println("};");
 

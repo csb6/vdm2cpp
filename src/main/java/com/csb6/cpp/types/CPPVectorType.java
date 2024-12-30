@@ -1,6 +1,5 @@
 package com.csb6.cpp.types;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class CPPVectorType extends CPPType {
@@ -14,19 +13,18 @@ public class CPPVectorType extends CPPType {
     }
 
     @Override
-    public Set<String> requiredHeaders() {
-        var headers = new HashSet<>(valueType.requiredHeaders());
+    public void collectRequiredHeaders(Set<String> headers) {
+        valueType.collectRequiredHeaders(headers);
         if(isString) {
             headers.add("string");
         } else {
             headers.add("vector");
         }
-        return headers;
     }
 
     @Override
-    public Set<String> requiredEnums() {
-        return valueType.requiredEnums();
+    public void collectRequiredEnums(Set<String> enums) {
+        valueType.collectRequiredEnums(enums);
     }
 
     @Override

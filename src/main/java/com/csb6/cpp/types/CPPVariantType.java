@@ -1,6 +1,5 @@
 package com.csb6.cpp.types;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,22 +12,18 @@ public class CPPVariantType extends CPPType {
     }
 
     @Override
-    public Set<String> requiredHeaders() {
-        var headers = new HashSet<String>();
+    public void collectRequiredHeaders(Set<String> headers) {
         for(var type : types) {
-            headers.addAll(type.requiredHeaders());
+            type.collectRequiredHeaders(headers);
         }
         headers.add("variant");
-        return headers;
     }
 
     @Override
-    public Set<String> requiredEnums() {
-        var enums = new HashSet<String>();
+    public void collectRequiredEnums(Set<String> enums) {
         for(var type : types) {
-            enums.addAll(type.requiredEnums());
+            type.collectRequiredEnums(enums);
         }
-        return enums;
     }
 
     @Override

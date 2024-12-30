@@ -1,6 +1,5 @@
 package com.csb6.cpp.types;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -15,22 +14,20 @@ public class CPPFunctionType extends CPPType {
     }
 
     @Override
-    public Set<String> requiredHeaders() {
-        var headers = new HashSet<>(resultType.requiredHeaders());
+    public void collectRequiredHeaders(Set<String> headers) {
+        resultType.collectRequiredHeaders(headers);
         for (var paramType : paramTypes) {
-            headers.addAll(paramType.requiredHeaders());
+            paramType.collectRequiredHeaders(headers);
         }
         headers.add("functional");
-        return headers;
     }
 
     @Override
-    public Set<String> requiredEnums() {
-        var enums = new HashSet<>(resultType.requiredEnums());
+    public void collectRequiredEnums(Set<String> enums) {
+        resultType.collectRequiredEnums(enums);
         for (var paramType : paramTypes) {
-            enums.addAll(paramType.requiredEnums());
+            paramType.collectRequiredEnums(enums);
         }
-        return enums;
     }
 
     @Override

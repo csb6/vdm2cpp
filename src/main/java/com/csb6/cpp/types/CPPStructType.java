@@ -1,7 +1,6 @@
 package com.csb6.cpp.types;
 
 import java.util.Set;
-import java.util.HashSet;
 
 import com.fujitsu.vdmj.tc.lex.TCNameToken;
 
@@ -16,21 +15,17 @@ public class CPPStructType extends CPPDefType {
     }
 
     @Override
-    public Set<String> requiredHeaders() {
-        var headers = new HashSet<String>();
+    public void collectRequiredHeaders(Set<String> headers) {
         for(var field : fields) {
-            headers.addAll(field.type.requiredHeaders());
+            field.type.collectRequiredHeaders(headers);
         }
-        return headers;
     }
 
     @Override
-    public Set<String> requiredEnums() {
-        var enums = new HashSet<String>();
+    public void collectRequiredEnums(Set<String> enums) {
         for(var field : fields) {
-            enums.addAll(field.type.requiredEnums());
+            field.type.collectRequiredEnums(enums);
         }
-        return enums;
     }
 
     @Override

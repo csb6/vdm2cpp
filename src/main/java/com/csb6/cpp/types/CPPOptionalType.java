@@ -1,6 +1,5 @@
 package com.csb6.cpp.types;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class CPPOptionalType extends CPPType {
@@ -12,15 +11,14 @@ public class CPPOptionalType extends CPPType {
     }
 
     @Override
-    public Set<String> requiredHeaders() {
-        var headers = new HashSet<>(type.requiredHeaders());
+    public void collectRequiredHeaders(Set<String> headers) {
+        type.collectRequiredHeaders(headers);
         headers.add("optional");
-        return headers;
     }
 
     @Override
-    public Set<String> requiredEnums() {
-        return type.requiredEnums();
+    public void collectRequiredEnums(Set<String> enums) {
+        type.collectRequiredEnums(enums);
     }
 
     @Override

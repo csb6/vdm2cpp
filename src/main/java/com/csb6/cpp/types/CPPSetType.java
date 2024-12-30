@@ -1,6 +1,5 @@
 package com.csb6.cpp.types;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class CPPSetType extends CPPType {
@@ -13,15 +12,14 @@ public class CPPSetType extends CPPType {
     }
 
     @Override
-    public Set<String> requiredHeaders() {
-        var headers = new HashSet<>(valueType.requiredHeaders());
+    public void collectRequiredHeaders(Set<String> headers) {
+        valueType.collectRequiredHeaders(headers);
         headers.add("set");
-        return headers;
     }
 
     @Override
-    public Set<String> requiredEnums() {
-        return valueType.requiredEnums();
+    public void collectRequiredEnums(Set<String> enums) {
+        valueType.collectRequiredEnums(enums);
     }
 
     @Override

@@ -16,7 +16,7 @@ public class CPPEnumType extends CPPType {
     }
 
     @Override
-    public Set<String> requiredEnums() {
-        return Set.of(value);
+    public void collectRequiredEnums(Set<String> enums) {
+        enums.add(value);
     }
 }
