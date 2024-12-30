@@ -2,6 +2,7 @@ package com.csb6.cpp.expressions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.fujitsu.vdmj.tc.expressions.TCAndExpression;
 import com.fujitsu.vdmj.tc.expressions.TCDivideExpression;
@@ -75,6 +76,18 @@ public class CPPBinaryExpression extends CPPAbstractBinaryExpression {
         var list = new ArrayList<CPPExpression>();
         list.add(this);
         return list;
+    }
+
+    @Override
+    public void collectRequiredHeaders(Set<String> headers) {
+        left.collectRequiredHeaders(headers);
+        right.collectRequiredHeaders(headers);
+    }
+
+    @Override
+    public void collectRequiredEnums(Set<String> enums) {
+        left.collectRequiredEnums(enums);
+        right.collectRequiredEnums(enums);
     }
 
     @Override

@@ -46,6 +46,7 @@ public class CPPFunctionDefinition extends CPPDefinition {
         for(var type : paramTypes) {
             type.collectRequiredHeaders(headers);
         }
+        body.collectRequiredHeaders(headers);
     }
 
     @Override
@@ -54,6 +55,7 @@ public class CPPFunctionDefinition extends CPPDefinition {
         for(var type : paramTypes) {
             type.collectRequiredEnums(enums);
         }
+        body.collectRequiredEnums(enums);
     }
 
     @Override

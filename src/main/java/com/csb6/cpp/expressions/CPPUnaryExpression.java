@@ -2,6 +2,7 @@ package com.csb6.cpp.expressions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.fujitsu.vdmj.tc.expressions.TCNotExpression;
 import com.fujitsu.vdmj.tc.expressions.TCUnaryMinusExpression;
@@ -32,6 +33,16 @@ public class CPPUnaryExpression extends CPPExpression {
         var list = new ArrayList<CPPExpression>();
         list.add(this);
         return list;
+    }
+
+    @Override
+    public void collectRequiredHeaders(Set<String> headers) {
+        subexpr.collectRequiredHeaders(headers);
+    }
+
+    @Override
+    public void collectRequiredEnums(Set<String> enums) {
+        subexpr.collectRequiredEnums(enums);
     }
 
     @Override

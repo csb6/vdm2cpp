@@ -24,5 +24,7 @@ public class CPPVarExpression extends CPPExpression {
     public String toString() {
         return name;
     }
-    
+
+    // No need for collectRequiredEnums() or collectRequiredHeaders() overrides
+    // since the definition of the variable will already have added them
 }
