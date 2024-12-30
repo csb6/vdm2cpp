@@ -56,6 +56,18 @@ map TCVariableExpression{name} to CPPVarExpression(name);
 map TCUnaryPlusExpression{exp} to CPPUnaryExpression(this, exp);
 map TCUnaryMinusExpression{exp} to CPPUnaryExpression(this, exp);
 map TCNotExpression{exp} to CPPUnaryExpression(this, exp);
+map TCBinaryExpression{} to CPPAbstractBinaryExpression();
+map TCAndExpression{left, right} to CPPBinaryExpression(left, this, right);
+map TCDivideExpression{left, right} to CPPBinaryExpression(left, this, right);
+map TCEquivalentExpression{left, right} to CPPBinaryExpression(left, this, right);
+map TCGreaterEqualExpression{left, right} to CPPBinaryExpression(left, this, right);
+map TCGreaterExpression{left, right} to CPPBinaryExpression(left, this, right);
+map TCLessEqualExpression{left, right} to CPPBinaryExpression(left, this, right);
+map TCLessExpression{left, right} to CPPBinaryExpression(left, this, right);
+map TCOrExpression{left, right} to CPPBinaryExpression(left, this, right);
+map TCPlusExpression{left, right} to CPPBinaryExpression(left, this, right);
+map TCSubtractExpression{left, right} to CPPBinaryExpression(left, this, right);
+map TCTimesExpression{left, right} to CPPBinaryExpression(left, this, right);
 
 # unmapped
 unmapped java.lang.Boolean;
