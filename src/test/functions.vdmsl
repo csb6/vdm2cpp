@@ -1,0 +1,44 @@
+module Functions
+exports all
+definitions
+
+functions
+    -- CHECK: #include <string>
+    -- CHECK-NOT: #include
+
+    -- CHECK: char ident(char c)
+    -- CHECK-NEXT: {
+    -- CHECK-NEXT:   return c;
+    -- CHECK-NEXT: }
+    ident: char -> char
+    ident(c) == c;
+
+    -- CHECK: int two_args(char, char)
+    -- CHECK-NEXT: {
+    -- CHECK-NEXT:   return 4;
+    -- CHECK-NEXT: }
+    two_args: char * char -> nat1
+    two_args(-, -) == 4;
+
+    -- CHECK: std::string string_lit(std::string)
+    -- CHECK-NEXT: {
+    -- CHECK-NEXT:   return "Hello, world";
+    -- CHECK-NEXT: }
+    string_lit: seq of char -> seq of char
+    string_lit(-) == "Hello, world";
+
+    -- CHECK: int unary_op(int a)
+    -- CHECK-NEXT: {
+    -- CHECK-NEXT:   return -a;
+    -- CHECK-NEXT: }
+    unary_op: int -> int
+    unary_op(a) == -a;
+
+    -- CHECK: int binary_ops(int a, int b, int c)
+    -- CHECK-NEXT: {
+    -- CHECK-NEXT:   return (((a + (1 * -b)) + 0) / c);
+    -- CHECK-NEXT: }
+    binary_ops: int * int * int -> int
+    binary_ops(a,b,c) == (a + 1 * -b + 0) / c;
+
+end Functions

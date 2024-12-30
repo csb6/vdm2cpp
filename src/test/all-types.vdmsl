@@ -1,0 +1,58 @@
+module AllTypes
+exports all
+definitions
+
+types
+    -- CHECK: #include <functional>
+    -- CHECK-NEXT: #include <map>
+    -- CHECK-NEXT: #include <optional>
+    -- CHECK-NEXT: #include <set>
+    -- CHECK-NEXT: #include <string>
+    -- CHECK-NEXT: #include <tuple>
+    -- CHECK-NEXT: #include <variant>
+    -- CHECK-NEXT: #include <vector>
+    -- CHECK-NOT: #include
+
+    -- CHECK: enum {
+    -- CHECK-NEXT:   A,
+    -- CHECK-NEXT: };
+    -- CHECK: using Named = int;
+    Named = nat;
+    -- CHECK: using Union = std::variant<Named, Record>;
+    Union = Record | Named;
+    -- CHECK: using Product = std::tuple<int, Named>;
+    Product = nat * Named;
+    -- CHECK: struct Record {
+    -- CHECK-NEXT:   int a;
+    -- CHECK-NEXT:   std::string b;
+    -- CHECK-NEXT:   Named c;
+    -- CHECK-NEXT:   float d;
+    -- CHECK-NEXT:   int e;
+    -- CHECK-NEXT:   float f;
+    -- CHECK-NEXT:   int g;
+    -- CHECK-NEXT: };
+    Record :: a : nat1
+              b : seq of char
+              c : Named
+              d : rat
+              e : int
+              f : real
+              g : <A>;
+    -- CHECK: using Optional = std::optional<int>;
+    Optional = [nat];
+    -- CHECK: using Set = std::set<char>;
+    -- CHECK: using Set1 = std::set<char>;
+    Set = set of char;
+    Set1 = set1 of char;
+    -- CHECK: using Seq = std::vector<Named>;
+    -- CHECK: using Seq1 = std::vector<Named>;
+    Seq = seq of Named;
+    Seq1 = seq1 of Named;
+    -- CHECK: using Map = std::map<int, char>;
+    -- CHECK: using InjectiveMap = std::map<int, char>;
+    Map = map nat to char;
+    InjectiveMap = inmap nat to char;
+    -- CHECK: using Function = std::function<char(char)>;
+    Function = char -> char;
+
+end AllTypes
