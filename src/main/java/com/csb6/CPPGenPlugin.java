@@ -1,6 +1,5 @@
 package com.csb6;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -78,9 +77,9 @@ public class CPPGenPlugin extends AnalysisPlugin implements EventListener {
         mapper.init();
 
         // Collect CPPDefinitions
-        var cppDefs = new ArrayList<CPPDefinition>();
-        for (var def : module.defs) {
-            cppDefs.add(mapper.convert(def));
+        var cppDefs = new CPPDefinition[module.defs.size()];
+        for (int i = 0; i < module.defs.size(); ++i) {
+            cppDefs[i] = mapper.convert(module.defs.get(i));
         }
 
         // Collect and print headers
