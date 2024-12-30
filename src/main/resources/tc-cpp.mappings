@@ -2,7 +2,7 @@
 package com.fujitsu.vdmj.tc.definitions to com.csb6.cpp.definitions;
 map TCDefinition{} to CPPDefinition();
 map TCTypeDefinition{type} to CPPTypeDefinition(type);
-map TCExplicitFunctionDefinition{type, name, paramPatternList, isCurried} to CPPFunctionDefinition(type, name, paramPatternList, isCurried);
+map TCExplicitFunctionDefinition{type, name, paramPatternList, isCurried, body} to CPPFunctionDefinition(type, name, paramPatternList, isCurried, body);
 
 # types
 package com.fujitsu.vdmj.tc.types to com.csb6.cpp.types;
@@ -44,6 +44,14 @@ map TCIgnorePattern{} to CPPVarPattern(this);
 # misc pattern-related types
 map TCPatternList{} to CPPPatternList(this);
 map TCPatternListList{} to CPPPatternListList(this);
+
+# expressions
+package com.fujitsu.vdmj.tc.expressions to com.csb6.cpp.expressions;
+map TCExpression{} to CPPExpression();
+map TCBooleanLiteralExpression{} to CPPLiteralExpression(this);
+map TCIntegerLiteralExpression{} to CPPLiteralExpression(this);
+map TCRealLiteralExpression{} to CPPLiteralExpression(this);
+map TCStringLiteralExpression{} to CPPLiteralExpression(this);
 
 # unmapped
 unmapped java.lang.Boolean;

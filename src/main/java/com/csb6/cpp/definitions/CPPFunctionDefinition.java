@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import com.csb6.cpp.expressions.CPPExpression;
 import com.csb6.cpp.patterns.CPPPatternList;
 import com.csb6.cpp.patterns.CPPPatternListList;
 import com.csb6.cpp.types.CPPFunctionType;
@@ -18,9 +19,9 @@ public class CPPFunctionDefinition extends CPPDefinition {
     public TCNameToken name;
     public CPPTypeList paramTypes;
     public CPPPatternList params;
+    public CPPExpression body;
 
-    // TODO: body
-    public CPPFunctionDefinition(CPPFunctionType type, TCNameToken name, CPPPatternListList paramPatternList, boolean isCurried) throws Exception {
+    public CPPFunctionDefinition(CPPFunctionType type, TCNameToken name, CPPPatternListList paramPatternList, boolean isCurried, CPPExpression body) throws Exception {
         this.resultType = type.resultType;
         this.name = name;
         this.paramTypes = type.paramTypes;
@@ -71,7 +72,9 @@ public class CPPFunctionDefinition extends CPPDefinition {
                 }
             })
             .collect(Collectors.joining(", ")));
-        s.append(");");
+        s.append(")\n{\n");
+
+        s.append("}");
         return s.toString();
     }
 }

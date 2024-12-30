@@ -22,10 +22,13 @@ types
     InjectiveMap = inmap nat to char;
     Function = char -> char;
 functions
-    ident: char -> char
-    ident(c) == c;
+    --ident: char -> char
+    --ident(c) == c;
 
     two_args: char * char -> nat1
     two_args(-, -) == 4;
+
+    string_lit: seq of char -> seq of char
+    string_lit(-) == "Hello, world";
 
 end Foo
