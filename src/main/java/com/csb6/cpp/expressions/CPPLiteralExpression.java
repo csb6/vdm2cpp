@@ -1,5 +1,8 @@
 package com.csb6.cpp.expressions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fujitsu.vdmj.tc.expressions.TCBooleanLiteralExpression;
 import com.fujitsu.vdmj.tc.expressions.TCIntegerLiteralExpression;
 import com.fujitsu.vdmj.tc.expressions.TCRealLiteralExpression;
@@ -23,5 +26,19 @@ public class CPPLiteralExpression extends CPPExpression {
 
     public CPPLiteralExpression(TCStringLiteralExpression lit) {
         this.value = lit.toString();
+    }
+
+    @Override
+    public List<CPPExpression> flatten()
+    {
+        var list = new ArrayList<CPPExpression>();
+        list.add(this);
+        return list;
+    }
+
+    @Override
+    public String toString()
+    {
+        return value;
     }
 }

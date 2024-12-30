@@ -25,6 +25,7 @@ public class CPPFunctionDefinition extends CPPDefinition {
         this.resultType = type.resultType;
         this.name = name;
         this.paramTypes = type.paramTypes;
+        this.body = body;
 
         if(isCurried) {
             throw new Exception("Cannot translate function '" + name + "' (curried functions are not supported)");
@@ -73,7 +74,13 @@ public class CPPFunctionDefinition extends CPPDefinition {
             })
             .collect(Collectors.joining(", ")));
         s.append(")\n{\n");
-
+        var stmtList = body.flatten();
+        if(stmtList.size() > 1) {
+            for(var stmt : stmtList.subList(0, stmtList.size() - 1)) {
+                s.append(String.format("  %s;\n", stmt));
+            }
+        }
+        s.append(String.format("  return %s;\n", stmtList.getLast()));
         s.append("}");
         return s.toString();
     }
