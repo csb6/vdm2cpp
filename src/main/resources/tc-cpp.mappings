@@ -52,6 +52,10 @@ map TCBooleanLiteralExpression{} to CPPLiteralExpression(this);
 map TCIntegerLiteralExpression{} to CPPLiteralExpression(this);
 map TCRealLiteralExpression{} to CPPLiteralExpression(this);
 map TCStringLiteralExpression{} to CPPLiteralExpression(this);
+map TCVariableExpression{name} to CPPVarExpression(name);
+map TCUnaryPlusExpression{exp} to CPPUnaryExpression(this, exp);
+map TCUnaryMinusExpression{exp} to CPPUnaryExpression(this, exp);
+map TCNotExpression{exp} to CPPUnaryExpression(this, exp);
 
 # unmapped
 unmapped java.lang.Boolean;
