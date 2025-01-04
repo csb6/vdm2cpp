@@ -1,8 +1,9 @@
 # VDM2CPP
 
-A translator of a subset of VDM-SL into C++, built as a plugin to [VDMJ](https://github.com/nickbattle/vdmj)
+A prototype translator of a subset of VDM-SL into C++, built as a plugin to [VDMJ](https://github.com/nickbattle/vdmj)
 
-Currently incomplete, but supports translating basic VDM type definitions and function signatures into C++ equivalents.
+Intended as a small experiment and not a complete translator, but supports translating basic VDM type definitions and
+function signatures into C++ equivalents.
 
 ## Types
 
